@@ -2,7 +2,7 @@ embed
 <drac2>
 # Grab vars. Prefers local, cvar, uvar in order of preference
 charname = get("name",default = "You")
-spellattackmod = str(get("spell",default = 0) + get("proficiencyBonus",default = 2))
+spellattackmod = str(int(get("spell",default = 0)) + int(get("proficiencyBonus",default = 2)))
 linebreak = '\n\n'
 
 # Reference Lists

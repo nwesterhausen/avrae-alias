@@ -3,7 +3,7 @@ embed
 
 # Grab vars. Prefers local, cvar, uvar in order of preference
 charname = get("name",default = "You")
-spellattackmod = str(get("spell",default = 0) + get("proficiencyBonus",default = 2))
+spellattackmod = str(int(get("spell",default = 0)) + int(get("proficiencyBonus",default = 2)))
 charlevel = get("level", default = 1)
 
 spelldesc = "A mote of fire flies towards the target. (A flammable object hit by this spell ignites if it isn't being worn or carried.)"
