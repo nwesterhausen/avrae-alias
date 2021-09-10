@@ -23,3 +23,18 @@ This alias handles all aspects of chaos bolt:
   additional d6 for damage
 - attack roll: will roll the attack roll with advantage or disadvantage if
   specified in the arguments.
+
+## Fire Bolt
+
+Accepts 1 argument:
+
+- `a` or `d`: cast the spell with **a**dvantage or **d**isadvantage respectively
+
+Uses the following user variables:
+
+- `charname`: the character name, defaults to "You"
+- `spellattackmod`: the ranged spell attack modifier, defaults to 2
+- `charlevel`: the character's level, defaults to 1
+
+This alias handles scaling the damage of fire bolt with character level as well
+as rolling attack (with advantage or disadvantage as needed).
