@@ -1,13 +1,9 @@
 embed
 <drac2>
-## Make sure to hardcode the following variables or to set uvars for them as 
-## appropriate for your use case.
-## charname:       character name
-## spellattackmod: ranged spell attack modifier
-if not uvar_exists("charname"):
-    charname = "You"
-if not uvar_exists("spellattackmod"):
-    spellattackmod = "2"
+# Grab vars. Prefers local, cvar, uvar in order of preference
+charname = get("name",default = "You")
+spellattackmod = get("spell",default = 0) + get("proficiencyBonus",default = 2)
+linebreak = '\n\n'
 
 # Reference Lists
 cb_descriptions = [
@@ -83,7 +79,7 @@ dmgtxt = f"2d8 ({d81}, {d82}) + {d6roll} = `{dmgt}` `{dtype}` damage, the bolt {
 # If both d8s match, on a hit the bolt spawn a new bolt
 extraeff = ""
 if d81 == d82:
-    extraeff = '\n'+'\n'+"**Chaotic Spellcasting:**"+'\n'+'\n'+"If this bolt hits the target, a new chaos bolt spawns at the target and flies towards a new target in range of the first! (This cannot rebound back and forth, or hit the same target more than once from one casting.)"
+    extraeff = f"{linebreak}**Chaotic Spellcasting:**{linebreak}If this bolt hits the target, a new chaos bolt spawns at the target and flies towards a new target in range of the first! (This cannot rebound back and forth, or hit the same target more than once from one casting.)"
 </drac2>
 
 -title "{{charname}} casts Chaos Bolt{{castlvldesc}}{{advantagedesc}}!"
