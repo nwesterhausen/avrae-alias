@@ -45,7 +45,7 @@ d61 = roll("d6")
 typei = randchoice([d81,d82]) - 1
 
 # Assign text descriptors for the damage types
-type = cb_types[typei]
+dtype = cb_types[typei]
 desc2 = cb_descriptions[typei]
 color = cb_colors[typei]
 
@@ -53,7 +53,7 @@ color = cb_colors[typei]
 dmgt = d81+d82+d61
 
 # Build damage text
-dmgtxt = f"2d8 ({d81}, {d82}) + 1d6 ({d61}) = `{dmgt}` `{type}` damage, the bolt {desc2}"
+dmgtxt = f"2d8 ({d81}, {d82}) + 1d6 ({d61}) = `{dmgt}` `{dtype}` damage, the bolt {desc2}"
 
 # If both d8s match, on a hit the bolt spawn a new bolt
 extraeff = ""
