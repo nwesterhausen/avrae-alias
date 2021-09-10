@@ -1,8 +1,13 @@
 embed
 <drac2>
-## Make sure to set the user variable "charname" to have it say your name!
+## Make sure to hardcode the following variables or to set uvars for them as 
+## appropriate for your use case.
+## charname:       character name
+## spellattackmod: ranged spell attack modifier
 if not uvar_exists("charname"):
     charname = "You"
+if not uvar_exists("spellattackmod"):
+    spellattackmod = "2"
 
 # Reference Lists
 cb_descriptions = [
@@ -52,8 +57,8 @@ if a == 'a':
 elif a == 'd':
     a = 'kl1'
     advantagedesc = " with disadvantage"
-attackMod = 4
-attackRoll = vroll(d +"d20"+ a + '+' + str(attackMod))
+
+attackRoll = vroll(d +"d20"+ a + '+' + spellattackmod)
 
 # Since the d8 values matter in deciding damage type, we roll each die
 d81 = roll("d8")
