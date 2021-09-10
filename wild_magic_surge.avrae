@@ -1,12 +1,17 @@
 embed
 <drac2>
+# Grab vars. Prefers local, cvar, uvar in order of preference
+charname = get("name",default = "You")
 lb = '\n\n'
+
 wmroll = roll("d20")
 
 wildmagichappen = "doesn't cause a wild magic side effect."
 wmdesc = ""
+color = "#2E7D32"
 if wmroll == 1:
     wildmagichappen = "causes a wild magic side effect!"
+    color = "#C62828"
     wmroll = vroll("1d100")
     wmdesc = f"**Wild Magic Roll**{lb}{wmroll}"
 
@@ -14,3 +19,4 @@ if wmroll == 1:
 
 -title "{{charname}} {{wildmagichappen}}"
 -desc "{{wmdesc}}"
+--color "{{color}}"

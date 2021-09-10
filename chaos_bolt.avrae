@@ -2,7 +2,7 @@ embed
 <drac2>
 # Grab vars. Prefers local, cvar, uvar in order of preference
 charname = get("name",default = "You")
-spellattackmod = get("spell",default = 0) + get("proficiencyBonus",default = 2)
+spellattackmod = str(get("spell",default = 0) + get("proficiencyBonus",default = 2))
 linebreak = '\n\n'
 
 # Reference Lists
@@ -20,7 +20,7 @@ cb_types = [
     "acid","cold","fire","force","lightning","poison","psychic","thunder"
 ]
 cb_colors = [
-    "#76FF03","#18FFFF","#E64A19","#90CAF9","#EEFF41","#66BB6A","#9C27B0","#A1887F"
+    "#76FF03","#00E5FF","#FF9100","#3D5AFE","#FFEA00","#00E676","#651FFF","#616161"
 ]
 
 # Argument parsing

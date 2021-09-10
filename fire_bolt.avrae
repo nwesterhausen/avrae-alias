@@ -1,16 +1,10 @@
 embed
 <drac2>
-## Make sure to hardcode the following variables or to set uvars for them as 
-## appropriate for your use case.
-## charname:       character name
-## spellattackmod: ranged spell attack modifier
-## charlevel:      character level
-if not uvar_exists("charname"):
-    charname = "You"
-if not uvar_exists("spellattackmod"):
-    spellattackmod = "2"
-if not uvar_exists("charlevel"):
-    charlevel = "1"
+
+# Grab vars. Prefers local, cvar, uvar in order of preference
+charname = get("name",default = "You")
+spellattackmod = str(get("spell",default = 0) + get("proficiencyBonus",default = 2))
+charlevel = get("level", default = 1)
 
 spelldesc = "A mote of fire flies towards the target. (A flammable object hit by this spell ignites if it isn't being worn or carried.)"
 
@@ -41,11 +35,11 @@ attackRoll = vroll(d +"d20"+ a + '+' + spellattackmod)
 
 # Damage roll, modified by character level cantrip scaling
 levelmod = 1
-if int(charlevel) > 4:
+if charlevel > 4:
     levelmod += 1
-if int(charlevel) > 10:
+if charlevel > 10:
     levelmod += 1
-if int(charlevel) > 16:
+if charlevel > 16:
     levelmod += 1
 
 damageroll = vroll(str(levelmod) + "d10")
