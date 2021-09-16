@@ -1,19 +1,49 @@
 embed
 <drac2>
 # Grab vars. Prefers local, cvar, uvar in order of preference
-charname = get("name",default = "You")
-lb = '\n\n'
+charname = get("name", default="You")
+lb = '\n'
 
+# Grab argument (used for spell level)
+args = &ARGS&
+spell_level = 1
+if args and args[0]:
+    spell_level = int(args[0])
+
+## Set some consequences. These are from a homebrew variant:
+## https://www.dandwiki.com/wiki/Wild_Magic_Surge_Table,_Variant_(5e_Variant_Rule)
+## When wild magic surge occurs, roll again on a d20 to determine the severity
+## of the wild magic mishap!
+##      1  -  3 Extreme Surge
+##      4  -  9 Moderate Surge
+##      10 - 20 Nuisance Surge
+## This helps to make things a little less likely to be a disaster.
+extreme_table = get_gvar("8997aaef-5010-4048-9604-7f37d4661c01").split('@')
+moderate_table = get_gvar("98425f5f-5851-45fb-aef5-dc3ce6a08375").split('@')
+nuisance_table = get_gvar("a976d6b0-8981-4171-ac8a-69bb979f7bd8").split('@')
+
+## Roll d20, on roll <= spell level cast cause a surge. This makes surges more
+## likely to happen the higher level spell you cast.
 wmroll = roll("d20")
+catroll = vroll("d20")
 
-wildmagichappen = "doesn't cause a wild magic side effect."
+## Print out some text
+wildmagichappen = f"doesn't cause a wild magic side effect after casting a level {spell_level} spell."
 wmdesc = ""
 color = "#2E7D32"
-if wmroll == 1:
+if wmroll <= spell_level:
     wildmagichappen = "causes a wild magic side effect!"
     color = "#C62828"
     wmroll = vroll("1d100")
-    wmdesc = f"**Wild Magic Roll**{lb}{wmroll}"
+    effect = nuisance_table[wmroll.total - 1]
+    catdesc = "MILD SURGE"
+    if catroll.total < 4:
+        effect = extreme_table[wmroll.total - 1]
+        catdesc = "EXTREME SURGE"
+    elif catroll.total < 10:
+        effect = moderate_table[wmroll.total - 1]
+        catdesc = "MODERATE SURGE"
+    wmdesc = f"**Category Roll**{lb}{lb}{catroll} `{catdesc}`{lb}{lb}**Wild Magic Roll**{lb}{lb}{wmroll}{lb}{lb}**Magic Surge Effect**{lb}{effect}"
 
 </drac2>
 

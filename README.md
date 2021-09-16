@@ -45,3 +45,30 @@ Uses the following variables:
 
 This alias handles scaling the damage of fire bolt with character level as well
 as rolling attack (with advantage or disadvantage as needed).
+
+## Wild Magic Surge
+
+This alias accepts 1 argument:
+
+- `1-10`: level of the spell cast. If you don't include the argument, it will assume
+  that you cast a level 1 spell. This is used for the optional rule listed in the wiki:
+  "Instead of a flat 5% ... roll d20 and subtract the level of the spell" If you supply
+  an argument > 19 then you will guarentee a wild magic surge.
+
+Uses the following variables:
+
+- `charname`: the character name, defaults to "You". Will prefer to use the
+  name of your current character, then will check for a uvar by "name"
+
+This alias will do both the chance roll for wild magic surge, and then will roll
+for a wild magic effect. It uses the homebrew wild magic suge table variant from
+[d&d wiki](<https://www.dandwiki.com/wiki/Wild_Magic_Surge_Table,_Variant_(5e_Variant_Rule)>).
+The roll tables are stored in the following global variables:
+
+| gvar                                 | description      |
+| ------------------------------------ | ---------------- |
+| 8997aaef-5010-4048-9604-7f37d4661c01 | nuisance effects |
+| 98425f5f-5851-45fb-aef5-dc3ce6a08375 | moderate effects |
+| 8997aaef-5010-4048-9604-7f37d4661c01 | extreme effects  |
+
+I have stored the value of these tables in the [gvars](/gvars) directory.
