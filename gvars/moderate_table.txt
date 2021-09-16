@@ -20,7 +20,7 @@ For 1 minute, you gain resistance to nonmagical bludgeoning, piercing, and slash
 You are protected from Elementals for 1 hour. Such creatures cannot attack you or harm you unless they succeed on a Charisma saving throw against your spell save DC.@
 For the next minute, one creature of your choice gets a -2 penalty to its AC, attack rolls, and damage rolls.@
 You and all creatures within 30 feet of you gain vulnerability to bludgeoning damage for 1 minute.@
-You emanate light in a 30-foot radius for 1 minute. Any creature within 5 feet of you that can see is blinded until the end of its next.@
+You emanate light in a 30-foot radius for 1 minute. Any creature within 5 feet of you that can see is blinded until the end of its next turn.@
 For the next hour, you gain advantage on Charisma checks when dealing with any creature wearing black, but disadvantage if they are wearing white. If they are wearing both, this doesn't apply.@
 You are protected from Plants for 1 hour. Such creatures cannot attack you or harm you unless they succeed on a Charisma saving throw against your spell save DC.@
 Your Intelligence is increased by 2 for 1 day.@
@@ -97,4 +97,4 @@ You gain the ability to speak with animals for 1 day.@
 All food and drink within 30 feet of you is purified.@
 You are protected from Aberrations for 1 hour. Such creatures cannot attack you or harm you unless they succeed on a Charisma savinng throw against your spell save DC.@
 All your clothing and equipment teleports to the nearest open space at least 15 feet from you that you can see.@
-Your Constitution is decreased by 2 for 1 hour.@
+Your Constitution is decreased by 2 for 1 hour.
