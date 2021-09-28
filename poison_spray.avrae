@@ -1,0 +1,26 @@
+embed
+<drac2>
+
+# Grab vars. Prefers local, cvar, uvar in order of preference
+charname = get("name",default = "You")
+spellattackmod = str(int(get("spell",default = 0)) + int(get("proficiencyBonus",default = 2)))
+charlevel = get("level", default = 1)
+
+spelldesc = "You extend your hand toward a creature you can see within range and project a puff of noxious gas from your palm. The creature must succeed on a Constitution saving throw or take 1d12 poison damage. This spell's damage increases by 1d12 when you reach 5th level (2d12), 11th level (3d12), and 17th level (4d12)."
+
+# Damage roll, modified by character level cantrip scaling
+levelmod = 1
+if charlevel > 4:
+    levelmod += 1
+if charlevel > 10:
+    levelmod += 1
+if charlevel > 16:
+    levelmod += 1
+
+damageroll = vroll(str(levelmod) + "d12")
+</drac2>
+
+-title "{{charname}} casts the cantrip Poison Spray!"
+-desc "{{spelldesc}}"
+-f "Damage roll|{{damageroll}} poison damage!"
+--color "#00E676"
