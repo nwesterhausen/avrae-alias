@@ -1,0 +1,37 @@
+embed
+<drac2>
+
+# Grab vars. Prefers local, cvar, uvar in order of preference
+charname = get("name",default = "You")
+spellattackmod = str(int(get("spell",default = 0)) + int(get("proficiencyBonus",default = 2)))
+charlevel = get("level", default = 1)
+
+linebreak = '\n\n'
+damageroll = "1d4+1"
+
+spelldesc = "You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range."
+
+# Argument parsing
+castlvl = 1
+args = &ARGS&
+for arg in args:
+    if typeof(arg) == "str":
+        if arg in ['1','2','3','4','5','6','7','8','9','10']:
+            castlvl = int(arg)
+
+# Make a pretty message if cast lvl is more than 1
+castlvldesc = ""
+if castlvl > 1:
+    castlvldesc = f" as a level {castlvl} spell"
+    spelldesc += f" Casting as a {castlvl} spell causes {castlvl - 1} more darts to fly towards the target!"
+
+# Loop through all the darts and add a fake "field" for them
+spelleff = f"{linebreak}"
+for i in range(2 + castlvl):
+    spelleff += f"**Bolt {i+1}**: {vroll(damageroll)}{linebreak}"
+
+</drac2>
+
+-title "{{charname}} casts Magic Missile{{castlvldesc}}!"
+-desc "{{spelldesc}}{{spelleff}}"
+--color "#adadad"
