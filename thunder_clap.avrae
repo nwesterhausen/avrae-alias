@@ -1,0 +1,26 @@
+embed
+<drac2>
+
+# Grab vars. Prefers local, cvar, uvar in order of preference
+charname = get("name",default = "You")
+spellattackmod = str(int(get("spell",default = 0)) + int(get("proficiencyBonus",default = 2)))
+charlevel = get("level", default = 1)
+
+spelldesc = "You create a burst of thunderous sound, which can be heard 100 feet away. Each creature other than you within 5 feet of you must make a Constitution saving throw. On a failed save, the creature takes 1d6 thunder damage. The spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
+
+# Damage roll, modified by character level cantrip scaling
+levelmod = 1
+if charlevel > 4:
+    levelmod += 1
+if charlevel > 10:
+    levelmod += 1
+if charlevel > 16:
+    levelmod += 1
+
+damageroll = vroll(str(levelmod) + "d6")
+</drac2>
+
+-title "{{charname}} casts the cantrip Thunder Clap!"
+-desc "{{spelldesc}}"
+-f "Damage roll|{{damageroll}} thunder damage!"
+--color "#616161"
