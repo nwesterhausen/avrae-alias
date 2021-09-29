@@ -28,7 +28,7 @@ if castlvl > 1:
 # Loop through all the darts and add a fake "field" for them
 spelleff = f"{linebreak}"
 for i in range(2 + castlvl):
-    spelleff += f"**Bolt {i+1}**: {vroll(damageroll)}{linebreak}"
+    spelleff += f"**Bolt {i+1}**: {vroll(damageroll)} `force`{linebreak}"
 
 </drac2>
 
