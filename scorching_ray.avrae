@@ -1,0 +1,65 @@
+embed
+<drac2>
+
+# Grab vars. Prefers local, cvar, uvar in order of preference
+charname = get("name",default = "You")
+spellattackmod = str(int(get("spell",default = 0)) + int(get("proficiencyBonus",default = 2)))
+charlevel = get("level", default = 1)
+
+linebreak = '\n\n'
+damagerolls = "2d6"
+attackrolls = []
+advantagedesc = ""
+
+spelldesc = "You create three rays of fire and hurl them at targets within range. You can hurl them at one target or several."
+
+# Argument parsing
+castlvl = 2
+args = &ARGS&
+for arg in args:
+    if typeof(arg) == "str":
+        if arg in ['1','2','3','4','5','6','7','8','9','10']:
+            castlvl = int(arg)
+        if arg.startswith("a"):
+            advantagedesc += " with advantage"
+            if len(arg) == 1:
+                attackrolls.append(vroll("2d20kh1+"+spellattackmod))
+            else:
+                advs = int(arg[1])
+                advantagedesc += " on "+advs
+                for i in range(advs):
+                    attackrolls.append(vroll("2d20kh1+"+spellattackmod))
+        if arg.startswith("d"):
+            advantagedesc += " with disadvantage"
+            if len(arg) == 1:
+                attackrolls.append(vroll("2d20kl1+"+spellattackmod))
+            else:
+                advs = int(arg[1])
+                advantagedesc += " on "+advs
+                for i in range(advs):
+                    attackrolls.append(vroll("2d20kl1+"+spellattackmod))
+
+# Make a pretty message if cast lvl is more than 1
+castlvldesc = ""
+if castlvl > 2:
+    castlvldesc = f" as a level {castlvl} spell"
+    spelldesc += f" Casting as a {castlvl} spell creates {castlvl - 2} more rays of fire!"
+
+# Make number of attack rolls match the number of rays
+numrays = 3 + (castlvl - 2)
+missing = numrays - len(attackrolls) 
+
+for i in range(missing):
+    attackrolls.append(vroll("1d20+"+spellattackmod))
+
+# Loop through all the darts and add a fake "field" for them
+spelleff = f"{linebreak}"
+for i in range(len(attackrolls)):
+    dmg = vroll(damagerolls)
+    spelleff += f"**Ray {i+1}**: *To hit*: {attackrolls[i]} | *Damage*: {dmg} `fire`{linebreak}"
+
+</drac2>
+
+-title "{{charname}} casts Scorching Ray{{castlvldesc}}{{advantagedesc}}!"
+-desc "{{spelldesc}}{{spelleff}}"
+--color "#FF9100"
