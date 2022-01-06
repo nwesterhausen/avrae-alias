@@ -57,5 +57,5 @@ shardRoll = vroll(str(shardmod) + "d6");
 -desc "{{spelldesc}}"
 -f "Attack roll|{{attackRoll}}"
 -f "Damage roll|{{damageroll}} piercing damage!"
--f "Shared Explosion (within 5ft of target)|{{shardRoll}} cold damage (take half if you succeed a DC12 DEX Save)"
+-f "Shard Explosion (within 5ft of target)|{{shardRoll}} cold damage (take half if you succeed a DC12 DEX Save)"
 --color "#00E5FF"
