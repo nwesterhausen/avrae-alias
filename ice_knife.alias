@@ -1,0 +1,61 @@
+embed
+<drac2>
+
+# Grab vars. Prefers local, cvar, uvar in order of preference
+charname = get("name",default = "You")
+spellattackmod = str(int(get("spell",default = 0)) + int(get("proficiencyBonus",default = 2)))
+charlevel = get("level", default = 1)
+
+spelldesc = "You create a shard of ice and fling it at one creature within range. Hit or miss, the shard then explodes. The target and each creature within 5 feet of the point where the ice exploded must succeed on a Dexterity saving throw or take 2d6 cold damage. At Higher Levels.\n\nWhen you cast this spell using a spell slot of 2nd level or higher, the cold damage increases by 1d6 for each slot level above 1st."
+
+## Argument parsing
+advantagemod = 0
+args = &ARGS&
+for arg in args:
+    if typeof(arg) == "str":
+        if arg == 'a' or arg == 'b':
+            advantagemod = arg
+
+# Argument parsing
+castlvl = 1
+args = &ARGS&
+for arg in args:
+    if typeof(arg) == "str":
+        if arg in ['1','2','3','4','5','6','7','8','9','10']:
+            castlvl = int(arg)
+
+# Make a pretty message if cast lvl is more than 1
+castlvldesc = ""
+if castlvl > 1:
+    castlvldesc = f" as a level {castlvl} spell"
+
+# Handling Advantage/Disadvantage on rolls
+advantagedesc = ""
+a = ''
+d = 1
+if advantagemod:
+    a = advantagemod
+    d = 2
+
+if a == 'a':
+    a = 'kh1'
+    advantagedesc = " with advantage"
+elif a == 'd':
+    a = 'kl1'
+    advantagedesc = " with disadvantage"
+
+attackRoll = vroll(d +"d20"+ a + '+' + spellattackmod)
+damageroll = vroll("1d10")
+
+# Shard Explosion Damage is lvl1 spell, each lvl after 1 adds 1 d6
+shardmod = 1 + castlvl;
+shardRoll = vroll(str(shardmod) + "d6");
+
+</drac2>
+
+-title "{{charname}} casts Ice Knife{{castlvldesc}}{{advantagedesc}}!"
+-desc "{{spelldesc}}"
+-f "Attack roll|{{attackRoll}}"
+-f "Damage roll|{{damageroll}} piercing damage!"
+-f "Shared Explosion (within 5ft of target)|{{shardRoll}} cold damage (take half if you succeed a DC12 DEX Save)"
+--color "#00E5FF"
