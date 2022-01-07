@@ -79,7 +79,7 @@ dmgtxt = f"2d8 ({d81}, {d82}) + {d6roll} = `{dmgt}` `{dtype}` damage, the bolt {
 # If both d8s match, on a hit the bolt spawn a new bolt
 extraeff = ""
 if d81 == d82:
-    extraeff = f"{linebreak}**Chaotic Spellcasting:**{linebreak}If this bolt hits the target, a new chaos bolt spawns at the target and flies towards a new target in range of the first! (This cannot rebound back and forth, or hit the same target more than once from one casting.)"
+    extraeff = f"{linebreak}**This bolt rebounds! (Chaotic Spellcasting):**{linebreak}If this bolt hits the target, a new chaos bolt spawns at the target and flies towards a new target in range of the first! (This cannot rebound back and forth, or hit the same target more than once from one casting.)"
 </drac2>
 
 -title "{{charname}} casts Chaos Bolt{{castlvldesc}}{{advantagedesc}}!"
