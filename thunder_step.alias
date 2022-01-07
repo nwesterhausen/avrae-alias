@@ -27,7 +27,7 @@ if castlvl > 3:
 damageroll = vroll(str(castlvl) + "d10")
 </drac2>
 
--title "{{charname}} casts the level 3 spell Thunder Clap{{castlvldesc}}!"
+-title "{{charname}} casts the level 3 spell Thunder Step{{castlvldesc}}!"
 -desc "{{spelldesc}}"
 -f "Damage roll (within 10ft of caster)|{{damageroll}} thunder damage (take half if you succeed a DC12 CON Save)"
 --color "#616161"
